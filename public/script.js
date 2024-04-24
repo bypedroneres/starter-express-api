@@ -1,8 +1,9 @@
 const socket = io('/');
 const videoGrid = document.getElementById('video-grid');
 const myPeer = new Peer(undefined, {
-    host: '/',
-    port: '3001'
+    path: '/peerjs', // Updated path
+    host: '/', // Updated host
+    port: location.port, // Updated port
 });
 
 const peers = {};
@@ -46,7 +47,7 @@ socket.on('user-disconnected', userId => {
 });
 
 function addVideoStream(userId, stream) {
-    if (!stream) return; // Skip if stream is null
+    if (!stream) return;
     const video = document.createElement('video');
     video.srcObject = stream;
     video.setAttribute('id', userId);
